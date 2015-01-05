@@ -7,7 +7,7 @@ var bbu = require('../index');
 var expect = chai.expect;
 var datetime = bbu.datetime;
 
-describe('iso->model->iso compare', function () {
+describe('datetime: iso->model->iso compare', function () {
     ['2012', '2012-05', '2012-05-23'].forEach(function (input) {
         it(input, function () {
             var model = datetime.dateToModel(input);
