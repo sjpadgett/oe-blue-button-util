@@ -5,10 +5,10 @@ var chai = require('chai');
 var bbu = require('../index');
 
 var expect = chai.expect;
-var array = bbu.array;
+var arrayset = bbu.arrayset;
 
-describe('array.append', function () {
-    var append = array.append;
+describe('arrayset.append', function () {
+    var append = arrayset.append;
 
     it('[] <- ["a", "b"]', function () {
         var r = [];
