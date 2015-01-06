@@ -28,3 +28,30 @@ describe('arrayset.append', function () {
         expect(r).to.deep.equal(["a", "b"]);
     });
 });
+
+describe('arrayset.remove', function () {
+    var remove = arrayset.remove;
+
+    it('based on property', function () {
+        var r = [{
+            id: "1",
+            v: "1"
+        }, {
+            id: "2",
+            v: "2"
+        }, {
+            id: "3",
+            v: "3"
+        }];
+        remove(r, function (e) {
+            return e.id === "2";
+        });
+        expect(r).to.deep.equal([{
+            id: "1",
+            v: "1"
+        }, {
+            id: "3",
+            v: "3"
+        }]);
+    });
+});
