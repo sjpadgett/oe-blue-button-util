@@ -34,6 +34,6 @@ Appends array `arrToAppend` elements to array `arr`.
 
 Recursively removes all the `null` and `undefined` values from `obj`.
 
-###objectset.merge(obj, src)
+####objectset.merge(obj, src)
 
 See [lodash](https://lodash.com/docs#merge).
