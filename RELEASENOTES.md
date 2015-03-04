@@ -2,6 +2,8 @@
 
 -object.deepValue(obj, deepProperty);
 -objectset.deepValue(obj, deepProperty, value)
+-predicate.hasProperty
+-predicate.hasNoProperty
 
 # v1.4.0 - February 27, 2015
 
