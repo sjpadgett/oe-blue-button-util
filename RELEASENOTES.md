@@ -1,3 +1,7 @@
+# v1.4.1 - TBD
+
+-objectset.deepValue(obj, deepProperty, value)
+
 # v1.4.0 - February 27, 2015
 
 This is the initial release of blue-button-util.js library.  It includes javascript utility methods.
