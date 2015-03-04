@@ -1,5 +1,6 @@
 # v1.4.1 - TBD
 
+-object.deepValue(obj, deepProperty);
 -objectset.deepValue(obj, deepProperty, value)
 
 # v1.4.0 - February 27, 2015
