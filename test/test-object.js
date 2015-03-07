@@ -102,5 +102,4 @@ describe('object.deepValue', function () {
         v = deepValue(r, 'a.b.c.d');
         expect(v).to.equal(null);
     });
-
 });
