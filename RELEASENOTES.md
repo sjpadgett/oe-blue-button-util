@@ -1,4 +1,4 @@
-# v1.4.1 - TBD
+# v1.4.1 - March 8, 2015
 
 -object.deepValue(obj, deepProperty);
 -objectset.deepValue(obj, deepProperty, value)
@@ -10,6 +10,7 @@
 -predicate.falsyPropertyValue
 -predicate.or
 -predicate.and
+- examples are added to documentation
 
 # v1.4.0 - February 27, 2015
 
