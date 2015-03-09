@@ -274,6 +274,7 @@ console.log(r3); // '2014-02-07T12:45:04.000Z'
 console.log(r4); // '2014-02-07T12:45:04.010Z'
 ```
 
+<a name="predicate" />
 ### `predicate` Library
 
 Provides methods that that return predicate functions on one argument.
