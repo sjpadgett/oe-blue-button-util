@@ -12,7 +12,7 @@ This library provides common Javascript utilities that are used in other Amida-T
 
 ##Utilities
 
-You can insall using [npm](https://www.npmjs.com).  Require to use in [node.js](https://nodejs.org/)
+You can install using [npm](https://www.npmjs.com) and  `require` to use in [node.js](https://nodejs.org/)
 ```js
 var bbu = require('blue-button-util');
 
@@ -26,9 +26,9 @@ var pred = bbu.pred;     // predicate library
 The following methods are provided
 - [`object.exists`](#object.exists)
 - [`object.deepValue`](#object.deepValue)
-- [`objectset.compact`](#object.compact)
+- [`objectset.compact`](#objectset.compact)
 - [`objectset.deepValue`](#objectset.deepValue)
-- [`arrayset.deepValue`](#arrayset.deepValue)
+- [`arrayset.append`](#arrayset.append)
 - [`datetime.dateToModel`](#datetime.dateToModel)
 - [`datetime.dateTimeToModel`](#datetime.dateTimeToModel)
 - [`datetime.modelToDate`](#datetime.modelToDate)
@@ -114,7 +114,7 @@ Provides utility methods that modify an object.
 <a name="objectset.compact" />
 ####objectset.compact(obj)
 
-Recursively removes all the `null` and `undefined` values from `obj`.  No special handling is done for resulting empty objects or arrays
+Recursively removes all `null` and `undefined` values from `obj`.  No special handling is done for resulting empty objects or arrays
 ```js
 var obj = {
     a: 1,
