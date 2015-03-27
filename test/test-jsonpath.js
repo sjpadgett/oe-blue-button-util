@@ -160,5 +160,4 @@ describe('original example', function () {
         var expected = example_0.store.book.slice(1);
         expect(actual).to.deep.equal(expected);
     });
-
 });
