@@ -43,7 +43,12 @@ var example_0 = {
 
 describe('original example', function () {
     var options = {
-        resultType: 'path'
+        resultType: 'path',
+        functions: {
+            round: function (obj) {
+                return Math.round(obj);
+            }
+        }
     };
 
     it('$.store.book[*].author', function () {
@@ -193,6 +198,16 @@ describe('original example', function () {
         var expected = [1, 2, 3].map(function (n) {
             return util.format("$['store']['book'][%s]", n);
         });
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$.store..price.round()', function () {
+        var jp = jsonpath.instance('$.store..price.round()', options);
+        var actual = jp(example_0);
+        var expected = _.range(example_0.store.book.length).map(function (n) {
+            return util.format("round($['store']['book'][%s]['price'])", n);
+        });
+        expected.push("round($['store']['bicycle']['price'])");
         expect(actual).to.deep.equal(expected);
     });
 });

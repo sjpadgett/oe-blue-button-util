@@ -77,4 +77,9 @@ describe('original example', function () {
         var actual = jsonpath.normalize('$.store.book[?(@path !== "$[\'store\'][\'book\'][0]")]');
         expect(actual).to.deep.equal(['$', 'store', 'book', '?(@path !== "$[\'store\'][\'book\'][0]")']);
     });
+
+    it('$.store..price.round()', function () {
+        var actual = jsonpath.normalize('$.store..price.round()');
+        expect(actual).to.deep.equal(['$', 'store', '..', 'price', 'round()']);
+    });
 });

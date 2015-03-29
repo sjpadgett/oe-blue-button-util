@@ -160,4 +160,21 @@ describe('original example', function () {
         var expected = example_0.store.book.slice(1);
         expect(actual).to.deep.equal(expected);
     });
+
+    it('$.store..price.round()', function () {
+        var opts = {
+            functions: {
+                round: function (obj) {
+                    return Math.round(obj);
+                }
+            }
+        };
+        var jp = jsonpath.instance('$.store..price.round()', opts);
+        var actual = jp(example_0);
+        var expected = example_0.store.book.map(function (book) {
+            return Math.round(book.price);
+        });
+        expected.push(Math.round(example_0.store.bicycle.price));
+        expect(actual).to.deep.equal(expected);
+    });
 });
