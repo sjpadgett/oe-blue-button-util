@@ -205,9 +205,9 @@ describe('original example', function () {
         var jp = jsonpath.instance('$.store..price.round()', options);
         var actual = jp(example_0);
         var expected = _.range(example_0.store.book.length).map(function (n) {
-            return util.format("round($['store']['book'][%s]['price'])", n);
+            return util.format("$['store']['book'][%s]['price'].round()", n);
         });
-        expected.push("round($['store']['bicycle']['price'])");
+        expected.push("$['store']['bicycle']['price'].round()");
         expect(actual).to.deep.equal(expected);
     });
 });
