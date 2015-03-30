@@ -87,6 +87,13 @@ describe('example-0, default options', function () {
         expect(actual).to.deep.equal(expected);
     });
 
+    it('$..book[1:]', function () {
+        var jp = jsonpath.instance('$..book[1:].price');
+        var actual = jp(example_0);
+        var expected = [example_0.store.book[1].price, example_0.store.book[2].price, example_0.store.book[3].price];
+        expect(actual).to.deep.equal(expected);
+    });
+
     it('$..book[*][category,author]', function () {
         var jp = jsonpath.instance('$..book[*][category,author]');
         var actual = jp(example_0);
