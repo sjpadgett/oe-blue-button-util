@@ -12,6 +12,7 @@ describe('examples', function () {
     var arrs = bbu.arrayset;
     var dtt = bbu.datetime;
     var pred = bbu.predicate;
+    var jsonpath = bbu.jsonpath;
 
     it('object.exists', function () {
         var r0 = ob.exists(null);
@@ -521,5 +522,51 @@ describe('examples', function () {
         expect(r2).to.equal(true);
         expect(r3).to.equal(true);
         expect(r4).to.equal(true);
+    });
+
+    it('jsonpath.instance', function () {
+        var example = {
+            "store": {
+                "book": [{
+                    "category": "reference",
+                    "author": "Nigel Rees",
+                    "title": "Sayings of the Century",
+                    "price": 8.95
+                }, {
+                    "category": "fiction",
+                    "author": "Evelyn Waugh",
+                    "title": "Sword of Honour",
+                    "price": 12.99
+                }, {
+                    "category": "fiction",
+                    "author": "Herman Melville",
+                    "title": "Moby Dick",
+                    "isbn": "0-553-21311-3",
+                    "price": 8.99
+                }, {
+                    "category": "fiction",
+                    "author": "J. R. R. Tolkien",
+                    "title": "The Lord of the Rings",
+                    "isbn": "0-395-19395-8",
+                    "price": 22.99
+                }],
+                "bicycle": {
+                    "color": "red",
+                    "price": 19.95
+                }
+            }
+        };
+
+        var options = {
+            functions: {
+                round: function (obj) {
+                    return Math.round(obj);
+                }
+            }
+        };
+        var jp = jsonpath.instance('$.store..price.round()', options);
+        var result = jp(example);
+        //console.log(result); // [ 9, 13, 9, 23, 20 ]
+        expect(result).to.deep.equal([9, 13, 9, 23, 20]);
     });
 });
