@@ -16,11 +16,12 @@ You can install using [npm](https://www.npmjs.com) and  `require` to use in [nod
 ```js
 var bbu = require('blue-button-util');
 
-var ob = bbu.object;     // object library
-var obs = bbu.object;    // objectset library
-var arrs = bbu.arrayset; // arrayset library
-var dtt = bbu.datetime;  // datetime library
-var pred = bbu.pred;     // predicate library
+var ob = bbu.object;         // object library
+var obs = bbu.object;        // objectset library
+var arrs = bbu.arrayset;     // arrayset library
+var dtt = bbu.datetime;      // datetime library
+var pred = bbu.pred;         // predicate library
+var jsonpath = bbu.jsonpath; // jsonpath library
 ```
 
 The following methods are provided
@@ -41,6 +42,7 @@ The following methods are provided
 - [`predicate.falsyPropertyValue`](#predicate.falsyPropertyValue)
 - [`predicate.and`](#predicate.and)
 - [`predicate.or`](#predicate.or)
+- [`jsonpath.instance`](#jsonpath.instance)
 
 ### `object` Library
 
@@ -532,6 +534,62 @@ console.log(r1); // false
 console.log(r2); // true
 console.log(r3); // true
 console.log(r4); // true
+```
+
+### `jsonpath` Library
+
+This library provides an implementation of [JSONPath](http://goessner.net/articles/JsonPath) with extended syntax for functions.  The code is originally based on and keeps all functionality of [this implementation](https://github.com/s3u/JSONPath).  API and code is structured so that no performance penalties are paid when parent (`^`) and path functionalities are not used.
+
+In addition to functionality described [here](https://github.com/s3u/JSONPath), this library implements ability to add functions as part of JSONPath.  The example below illustrates the additional functionality.
+
+<a name="jsonpath.instance" />
+#### instance(inputExpr, opts)
+
+Returns a JSONPath evaluator.
+```js
+var example = {
+    "store": {
+        "book": [{
+            "category": "reference",
+            "author": "Nigel Rees",
+            "title": "Sayings of the Century",
+            "price": 8.95
+        }, {
+            "category": "fiction",
+            "author": "Evelyn Waugh",
+            "title": "Sword of Honour",
+            "price": 12.99
+        }, {
+            "category": "fiction",
+            "author": "Herman Melville",
+            "title": "Moby Dick",
+            "isbn": "0-553-21311-3",
+            "price": 8.99
+        }, {
+            "category": "fiction",
+            "author": "J. R. R. Tolkien",
+            "title": "The Lord of the Rings",
+            "isbn": "0-395-19395-8",
+            "price": 22.99
+        }],
+        "bicycle": {
+            "color": "red",
+            "price": 19.95
+        }
+    }
+};
+
+var options = {
+    functions: {
+        round: function (obj) {
+            return Math.round(obj);
+        }
+    }
+};
+
+var jp = jsonpath.instance('$.store..price.round()', options);
+var result = jp(example);
+console.log(result); // [ 9, 13, 9, 23, 20 ]
 ```
 
 ## License
