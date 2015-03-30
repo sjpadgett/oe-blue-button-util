@@ -76,7 +76,7 @@ describe('example-0, default options', function () {
     it('$store.book[1].price', function () {
         var jp = jsonpath.instance('$store.book[1].price');
         var actual = jp(example_0);
-        var expected = [example_0.store.book[1].price];
+        var expected = example_0.store.book[1].price;
         expect(actual).to.deep.equal(expected);
     });
 
@@ -152,6 +152,20 @@ describe('example-0, default options', function () {
             return Math.round(book.price);
         });
         expected.push(Math.round(example_0.store.bicycle.price));
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[1].pricex');
+        var actual = jp(example_0);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[*].pricex');
+        var actual = jp(example_0);
+        var expected = [];
         expect(actual).to.deep.equal(expected);
     });
 });
@@ -305,6 +319,20 @@ describe('example-0, wrap=true', function () {
         expected.push(Math.round(example_0.store.bicycle.price));
         expect(actual).to.deep.equal(expected);
     });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[1].pricex', opts);
+        var actual = jp(example_0);
+        var expected = [];
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[*].pricex', opts);
+        var actual = jp(example_0);
+        var expected = [];
+        expect(actual).to.deep.equal(expected);
+    });
 });
 
 describe('example-0, wrap=false', function () {
@@ -455,6 +483,20 @@ describe('example-0, wrap=false', function () {
             return Math.round(book.price);
         });
         expected.push(Math.round(example_0.store.bicycle.price));
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[1].pricex', opts);
+        var actual = jp(example_0);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].pricex', function () {
+        var jp = jsonpath.instance('$store.book[*].pricex', opts);
+        var actual = jp(example_0);
+        var expected = null;
         expect(actual).to.deep.equal(expected);
     });
 });

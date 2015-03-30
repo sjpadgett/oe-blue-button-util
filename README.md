@@ -540,7 +540,8 @@ console.log(r4); // true
 
 This library provides an implementation of [JSONPath](http://goessner.net/articles/JsonPath) with extended syntax for functions.  The code is originally based on and keeps all functionality of [this implementation](https://github.com/s3u/JSONPath).  API and code is structured so that no performance penalties are paid when parent (`^`) and path functionalities are not used.
 
-In addition to functionality described [here](https://github.com/s3u/JSONPath), this library implements ability to add functions as part of JSONPath.  The example below illustrates the additional functionality.
+In addition to functionality described [here](https://github.com/s3u/JSONPath), this library implements ability to add functions as part of JSONPath.  The example below illustrates the additional functionality.  Some options functionality are also modified as follows
+- ***wrap*** - Whether or not to wrap the results in an array. If `wrap` is set to true, the result will always be an array which can be empty.  If `wrap` is set to false, and no results are found, `null` will be returned (as opposed to an empty array). If `wrap` is set to false and a single result is found, that result will be the only item returned. If `wrap` is not specified, it is set to `true` if branching elements (`..`, `*`, `:` (range), `,` (multiple properties)) are used and it will set to `false` otherwise. An array will still be returned if multiple results are found, however.
 
 <a name="jsonpath.instance" />
 #### instance(inputExpr, opts)
