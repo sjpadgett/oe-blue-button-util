@@ -1,3 +1,7 @@
+# v1.4.2 - March 29, 2015
+
+- jsonpath library is added
+
 # v1.4.1 - March 8, 2015
 
 -object.deepValue(obj, deepProperty);
