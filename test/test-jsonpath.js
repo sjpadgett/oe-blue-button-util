@@ -172,7 +172,7 @@ describe('example-0, default options', function () {
     it('$store.book[1].pricex', function () {
         var jp = jsonpath.instance('$store.book[*].pricex');
         var actual = jp(example_0);
-        var expected = [];
+        var expected = null;
         expect(actual).to.deep.equal(expected);
     });
 });
@@ -334,7 +334,7 @@ describe('example-0, wrap=true', function () {
         expect(actual).to.deep.equal(expected);
     });
 
-    it('$store.book[1].pricex', function () {
+    it('$store.book[*].pricex', function () {
         var jp = jsonpath.instance('$store.book[*].pricex', opts);
         var actual = jp(example_0);
         var expected = [];
@@ -500,7 +500,7 @@ describe('example-0, wrap=false', function () {
         expect(actual).to.deep.equal(expected);
     });
 
-    it('$store.book[1].pricex', function () {
+    it('$store.book[*].pricex', function () {
         var jp = jsonpath.instance('$store.book[*].pricex', opts);
         var actual = jp(example_0);
         var expected = null;
