@@ -11,7 +11,7 @@ var jsonpath = bbu.jsonpath;
 
 var store = require('./examples/store.json');
 
-describe('original example', function () {
+describe('jsonpath store example path option', function () {
     var options = {
         resultType: 'path',
         functions: {

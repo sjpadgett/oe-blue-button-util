@@ -7,7 +7,7 @@ var bbu = require('../../index');
 var expect = chai.expect;
 var jsonpath = bbu.jsonpath;
 
-describe('original example', function () {
+describe('jsonpath normalization', function () {
     it('$.store.book[*].author', function () {
         var actual = jsonpath.normalize('$.store.book[*].author');
         expect(actual).to.deep.equal(['$', 'store', 'book', '*', 'author']);
