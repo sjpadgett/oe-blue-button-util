@@ -2,7 +2,7 @@
 
 var chai = require('chai');
 
-var bbu = require('../index');
+var bbu = require('../../index');
 
 var expect = chai.expect;
 var jsonpath = bbu.jsonpath;

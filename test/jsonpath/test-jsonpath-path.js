@@ -4,7 +4,7 @@ var chai = require('chai');
 var util = require('util');
 var _ = require('lodash');
 
-var bbu = require('../index');
+var bbu = require('../../index');
 
 var expect = chai.expect;
 var jsonpath = bbu.jsonpath;

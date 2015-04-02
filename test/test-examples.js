@@ -525,7 +525,7 @@
      });
 
      it('jsonpath.instance', function () {
-         var example = require('./examples/example_0.json');
+         var example = require('./jsonpath/examples/example_0.json');
 
          var options = {
              functions: {
