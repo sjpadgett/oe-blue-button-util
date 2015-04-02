@@ -9,7 +9,7 @@ var bbu = require('../../index');
 var expect = chai.expect;
 var jsonpath = bbu.jsonpath;
 
-var example_0 = require('./examples/example_0.json');
+var store = require('./examples/store.json');
 
 describe('original example', function () {
     var options = {
@@ -23,8 +23,8 @@ describe('original example', function () {
 
     it('$.store.book[*].author', function () {
         var jp = jsonpath.instance('$.store.book[*].author', options);
-        var actual = jp(example_0);
-        var expected = _.range(example_0.store.book.length).map(function (n) {
+        var actual = jp(store);
+        var expected = _.range(store.store.book.length).map(function (n) {
             return util.format("$['store']['book'][%s]['author']", n);
         });
         expect(actual).to.deep.equal(expected);
@@ -32,8 +32,8 @@ describe('original example', function () {
 
     it('$..author', function () {
         var jp = jsonpath.instance('$..author', options);
-        var actual = jp(example_0);
-        var expected = _.range(example_0.store.book.length).map(function (n) {
+        var actual = jp(store);
+        var expected = _.range(store.store.book.length).map(function (n) {
             return util.format("$['store']['book'][%s]['author']", n);
         });
         expect(actual).to.deep.equal(expected);
@@ -41,8 +41,8 @@ describe('original example', function () {
 
     it('$.store.*', function () {
         var jp = jsonpath.instance('$.store.*', options);
-        var actual = jp(example_0);
-        var expected = Object.keys(example_0.store).map(function (s) {
+        var actual = jp(store);
+        var expected = Object.keys(store.store).map(function (s) {
             return util.format("$['store']['%s']", s);
         });
         expect(actual).to.deep.equal(expected);
@@ -50,8 +50,8 @@ describe('original example', function () {
 
     it('$.store..price', function () {
         var jp = jsonpath.instance('$.store..price', options);
-        var actual = jp(example_0);
-        var expected = _.range(example_0.store.book.length).map(function (n) {
+        var actual = jp(store);
+        var expected = _.range(store.store.book.length).map(function (n) {
             return util.format("$['store']['book'][%s]['price']", n);
         });
         expected.push("$['store']['bicycle']['price']");
@@ -60,28 +60,28 @@ describe('original example', function () {
 
     it('$..book[2]', function () {
         var jp = jsonpath.instance('$..book[2]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = ["$['store']['book'][2]"];
         expect(actual).to.deep.equal(expected);
     });
 
     it('$..book[(@.length-1)]', function () {
         var jp = jsonpath.instance('$..book[(@.length-1)]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = ["$['store']['book'][3]"];
         expect(actual).to.deep.equal(expected);
     });
 
     it('$..book[-1:]', function () {
         var jp = jsonpath.instance('$..book[-1:]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = ["$['store']['book'][3]"];
         expect(actual).to.deep.equal(expected);
     });
 
     it('$..book[1,2]', function () {
         var jp = jsonpath.instance('$..book[1,2]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [1, 2].map(function (n) {
             return util.format("$['store']['book'][%s]", n);
         });
@@ -90,7 +90,7 @@ describe('original example', function () {
 
     it('$..book[:2]', function () {
         var jp = jsonpath.instance('$..book[:2]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [0, 1].map(function (n) {
             return util.format("$['store']['book'][%s]", n);
         });
@@ -99,8 +99,8 @@ describe('original example', function () {
 
     it('$..book[*][category,author]', function () {
         var jp = jsonpath.instance('$..book[*][category,author]', options);
-        var actual = jp(example_0);
-        var expected = _.range(example_0.store.book.length).reduce(function (r, n) {
+        var actual = jp(store);
+        var expected = _.range(store.store.book.length).reduce(function (r, n) {
             r.push(util.format("$['store']['book'][%s]['category']", n));
             r.push(util.format("$['store']['book'][%s]['author']", n));
             return r;
@@ -110,7 +110,7 @@ describe('original example', function () {
 
     it('$..book[?(@.isbn)]', function () {
         var jp = jsonpath.instance('$..book[?(@.isbn)]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [2, 3].map(function (n) {
             return util.format("$['store']['book'][%s]", n);
         });
@@ -119,7 +119,7 @@ describe('original example', function () {
 
     it('$..[?(@.price>19)]^', function () {
         var jp = jsonpath.instance('$..[?(@.price>19)]^', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [
             "$['store']",
             "$['store']['book']"
@@ -129,7 +129,7 @@ describe('original example', function () {
 
     it('$..*', function () {
         var jp = jsonpath.instance('$..*', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [
             "$['store']",
             "$['store']['book']",
@@ -164,7 +164,7 @@ describe('original example', function () {
 
     it('$.store.book[?(@path !== "$[\'store\'][\'book\'][0]")]', function () {
         var jp = jsonpath.instance('$.store.book[?(@path !== "$[\'store\'][\'book\'][0]")]', options);
-        var actual = jp(example_0);
+        var actual = jp(store);
         var expected = [1, 2, 3].map(function (n) {
             return util.format("$['store']['book'][%s]", n);
         });
@@ -173,8 +173,8 @@ describe('original example', function () {
 
     it('$.store..price.round()', function () {
         var jp = jsonpath.instance('$.store..price.round()', options);
-        var actual = jp(example_0);
-        var expected = _.range(example_0.store.book.length).map(function (n) {
+        var actual = jp(store);
+        var expected = _.range(store.store.book.length).map(function (n) {
             return util.format("$['store']['book'][%s]['price'].round()", n);
         });
         expected.push("$['store']['bicycle']['price'].round()");
