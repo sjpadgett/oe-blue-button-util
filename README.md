@@ -540,7 +540,7 @@ console.log(r4); // true
 <a name="predicate.not" />
 #### not(fn)
 
-Returns a predicate that or's other predicates
+Returns a predicate that negates another predicate
 ```js
 var fn = pred.hasProperty('a');
 
