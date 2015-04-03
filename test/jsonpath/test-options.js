@@ -21,13 +21,20 @@ describe('jsonpath options', function () {
         expect(actual).to.deep.equal(expected);
     });
 
+    it('no input expression', function () {
+        var fn = function () {
+            return jsonpath.instance();
+        };
+        expect(fn).to.throw(Error);
+    });
+
     it('unknown resultType', function () {
-    	var fn = function() {
-	        return jsonpath.instance('$.store[*]', {
-            	flatten: true,
-            	resultType: 'something'
-        	});
-	    };
-	    expect(fn).to.throw(Error);
+        var fn = function () {
+            return jsonpath.instance('$.store[*]', {
+                flatten: true,
+                resultType: 'something'
+            });
+        };
+        expect(fn).to.throw(Error);
     });
 });

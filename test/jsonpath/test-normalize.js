@@ -87,4 +87,9 @@ describe('jsonpath normalization', function () {
         var actual = jsonpath.normalize('$.link[$.obj.library.books[0].references[*]].title');
         expect(actual).to.deep.equal(['$', 'link', '$.obj.library.books[0].references[*]', 'title']);
     });
+
+    it('$..book[*].category^', function () {
+        var fn = jsonpath.instance.bind(null, '$..book[*].category^');
+        expect(fn).to.throw(Error);
+    });
 });

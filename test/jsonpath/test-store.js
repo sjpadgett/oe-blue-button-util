@@ -424,6 +424,26 @@ describe('jsonpath store example wrap=false', function () {
         expect(actual).to.deep.equal(expected);
     });
 
+    it('$..book[0:6:2]', function () {
+        var jp = jsonpath.instance('$..book[0:6:2]', opts);
+        var actual = jp(store);
+        var expected = [store.store.book[0], store.store.book[2]];
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$..book[2:-1]', function () {
+        var jp = jsonpath.instance('$..book[1:-1]', opts);
+        var actual = jp(store);
+        var expected = [store.store.book[1], store.store.book[2]];
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$..book[1,2]', function () {
+        var jp = jsonpath.instance('$..book[1,2]', opts);
+        var actual = jp(null);
+        expect(actual).to.equal(null);
+    });
+
     it('$..book[:2]', function () {
         var jp = jsonpath.instance('$..book[:2]', opts);
         var actual = jp(store);
@@ -519,5 +539,31 @@ describe('jsonpath store example wrap=false', function () {
         var actual = jp(store);
         var expected = null;
         expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].price[?(@nothing>0)]', function () {
+        var jp = jsonpath.instance('$store.book[1].price[?(@nothing>0)]', opts);
+        var actual = jp(store);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].price..', function () {
+        var jp = jsonpath.instance('$store.book[1].price..', opts);
+        var actual = jp(store);
+        expect(actual).to.equal(12.99);
+    });
+
+    it('$store.book[$.nothing]', function () {
+        var jp = jsonpath.instance('$store.book[$.nothing]', opts);
+        var actual = jp(store);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[(*dsdsd*--44)]', function () {
+        var jp = jsonpath.instance('$store.book[(*dsdsd*--44)]');
+        var jpbind = jp.bind(null, store);
+        expect(jpbind).to.throw(Error);
     });
 });
