@@ -2,12 +2,12 @@
 
 var chai = require('chai');
 
-var bbu = require('../index');
+var bbu = require('../../index');
 
 var expect = chai.expect;
 var jsonpath = bbu.jsonpath;
 
-describe('original example', function () {
+describe('jsonpath normalization', function () {
     it('$.store.book[*].author', function () {
         var actual = jsonpath.normalize('$.store.book[*].author');
         expect(actual).to.deep.equal(['$', 'store', 'book', '*', 'author']);
@@ -81,5 +81,10 @@ describe('original example', function () {
     it('$.store..price.round()', function () {
         var actual = jsonpath.normalize('$.store..price.round()');
         expect(actual).to.deep.equal(['$', 'store', '..', 'price', 'round()']);
+    });
+
+    it('$.link[$.obj.library.books[0].references[*]].title', function () {
+        var actual = jsonpath.normalize('$.link[$.obj.library.books[0].references[*]].title');
+        expect(actual).to.deep.equal(['$', 'link', '$.obj.library.books[0].references[*]', 'title']);
     });
 });

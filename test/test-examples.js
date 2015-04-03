@@ -524,8 +524,43 @@
          expect(r4).to.equal(true);
      });
 
-     it('jsonpath.instance', function () {
-         var example = require('./examples/example_0.json');
+     it('predicate.not', function () {
+         var fn = pred.hasProperty('a');
+
+         var f = pred.not(fn);
+
+         var r0 = f(null);
+         var r1 = f({
+             a: 1
+         });
+         var r2 = f({
+             a: {
+                 b: 1
+             }
+         });
+         var r3 = f({
+             b: {
+                 c: 1
+             }
+         });
+         var r4 = f({
+             b: 1
+         });
+
+         //console.log(r0); // true
+         //console.log(r1); // false
+         //console.log(r2); // flase
+         //console.log(r3); // true
+         //console.log(r4); // true
+         expect(r0).to.equal(true);
+         expect(r1).to.equal(false);
+         expect(r2).to.equal(false);
+         expect(r3).to.equal(true);
+         expect(r4).to.equal(true);
+     });
+
+     it('jsonpath.instance - 0', function () {
+         var example = require('./jsonpath/examples/store.json');
 
          var options = {
              functions: {
@@ -539,4 +574,20 @@
          //console.log(result); // [ 9, 13, 9, 23, 20 ]
          expect(result).to.deep.equal([9, 13, 9, 23, 20]);
      });
+
+     it('jsonpath.instance - 1', function () {
+         var example = require('./jsonpath/examples/store.json');
+
+         var round = function (obj) {
+             return Math.round(obj);
+         };
+
+         var jp = jsonpath.instance('$.store..price.round()');
+         var result = jp(example, {
+             round: round
+         });
+         //console.log(result); // [ 9, 13, 9, 23, 20 ]
+         expect(result).to.deep.equal([9, 13, 9, 23, 20]);
+     });
+
  });

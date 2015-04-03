@@ -42,6 +42,7 @@ The following methods are provided
 - [`predicate.falsyPropertyValue`](#predicate.falsyPropertyValue)
 - [`predicate.and`](#predicate.and)
 - [`predicate.or`](#predicate.or)
+- [`predicate.not`](#predicate.not)
 - [`jsonpath.instance`](#jsonpath.instance)
 
 ### `object` Library
@@ -536,6 +537,40 @@ console.log(r3); // true
 console.log(r4); // true
 ```
 
+<a name="predicate.not" />
+#### not(fn)
+
+Returns a predicate that negates another predicate
+```js
+var fn = pred.hasProperty('a');
+
+var f = pred.not(fn);
+
+var r0 = f(null);
+var r1 = f({
+    a: 1
+});
+var r2 = f({
+    a: {
+        b: 1
+    }
+});
+var r3 = f({
+    b: {
+        c: 1
+    }
+});
+var r4 = f({
+    b: 1
+});
+
+console.log(r0); // true
+console.log(r1); // false
+console.log(r2); // flase
+console.log(r3); // true
+console.log(r4); // true
+```
+
 ### `jsonpath` Library
 
 This library provides an implementation of [JSONPath](http://goessner.net/articles/JsonPath) with extended syntax for functions.  The code is originally based on and keeps all functionality of [this implementation](https://github.com/s3u/JSONPath).  API and code is structured so that no performance penalties are paid when parent (`^`) and path functionalities are not used.
@@ -547,7 +582,7 @@ In addition to functionality described [here](https://github.com/s3u/JSONPath), 
 <a name="jsonpath.instance" />
 #### instance(inputExpr, opts)
 
-Returns a JSONPath evaluator.
+Returns a JSONPath evaluator.  You can define functions for JSONPath expressions in `opts.functions`
 ```js
 var example = {
     "store": {
@@ -591,6 +626,20 @@ var options = {
 
 var jp = jsonpath.instance('$.store..price.round()', options);
 var result = jp(example);
+console.log(result); // [ 9, 13, 9, 23, 20 ]
+```
+
+It is also possible to define functions during the evaluation call
+```js
+
+var round = function (obj) {
+    return Math.round(obj);
+};
+
+var jp = jsonpath.instance('$.store..price.round()');
+var result = jp(example, {
+    round: round
+});
 console.log(result); // [ 9, 13, 9, 23, 20 ]
 ```
 
