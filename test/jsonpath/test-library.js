@@ -32,18 +32,19 @@ describe('jsonpath library example', function () {
         expect(actual).to.deep.equal(expected);
     });
 
-    it('undefined predefined functions', function () {
-        var jpbinded = jsonpath.instance.bind('$.library.books[0].references[*].findLinked().title');
-        expect(jpbinded).to.throw(Error);
-    });
-
     it('postdefined functions', function () {
-        var jp = jsonpath.instance('$.library.books[0].references[*].findLinked().title');
+        var jp = jsonpath.instance('library.books[0].references[*].findLinked().title');
         var actual = jp(library, {
             findLinked: findLinked
         });
         var expected = ["Sword of Honour", "The Lord of the Rings"];
         expect(actual).to.deep.equal(expected);
+    });
+
+    it('undefined functions', function () {
+        var jp = jsonpath.instance('library.books[0].references[*].findLinked().title');
+        var jpbinded = jp.bind(null, library);
+        expect(jpbinded).to.throw(Error);
     });
 
     it('root ($) expression in path, array', function () {
@@ -67,6 +68,16 @@ describe('jsonpath library example', function () {
         var jp = jsonpath.instance('$.link[$.obj.library.books[0].references[0]].title');
         var actual = jp(wrappedLibrary);
         var expected = "Sword of Honour";
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('conditional', function () {
+        var jp = jsonpath.instance('$.library.books[?(@.id==="SOH")].price', {
+            wrap: true
+        });
+
+        var actual = jp(library);
+        var expected = [12.99];
         expect(actual).to.deep.equal(expected);
     });
 });

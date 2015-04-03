@@ -162,6 +162,13 @@ describe('jsonpath store example default options', function () {
         expect(actual).to.deep.equal(expected);
     });
 
+    it('$.store..price.round', function () {
+        var jp = jsonpath.instance('$.store..price.round');
+        var actual = jp(store);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
     it('$store.book[1].pricex', function () {
         var jp = jsonpath.instance('$store.book[1].pricex');
         var actual = jp(store);
@@ -170,7 +177,14 @@ describe('jsonpath store example default options', function () {
     });
 
     it('$store.book[1].pricex', function () {
-        var jp = jsonpath.instance('$store.book[*].pricex');
+        var jp = jsonpath.instance('store.book[*].pricex');
+        var actual = jp(store);
+        var expected = null;
+        expect(actual).to.deep.equal(expected);
+    });
+
+    it('$store.book[1].price[*]', function () {
+        var jp = jsonpath.instance('store.book[*].price[*]');
         var actual = jp(store);
         var expected = null;
         expect(actual).to.deep.equal(expected);

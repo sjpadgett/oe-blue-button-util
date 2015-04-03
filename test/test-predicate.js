@@ -419,3 +419,26 @@ describe('predicate.and', function () {
         expect(fn(input)).not.to.be.ok;
     });
 });
+
+describe('predicate.not', function () {
+    var not = predicate.not;
+
+    it('basic', function () {
+        var fnsource = predicate.hasProperty('a');
+        var fn = not(fnsource);
+
+        expect(fn(null)).to.be.ok;
+
+        var input = {};
+        expect(fn(input)).to.be.ok;
+
+        input.a = 4;
+        expect(fn(input)).not.to.be.ok;
+
+        input.b = 6;
+        expect(fn(input)).not.to.be.ok;
+
+        delete input.a;
+        expect(fn(input)).to.be.ok;
+    });
+});

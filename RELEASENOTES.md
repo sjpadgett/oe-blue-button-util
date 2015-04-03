@@ -1,7 +1,9 @@
 # 1.5.0 - TBD
 
-- `wrap` options functionality is modified.  See README.
-- `emptyValue` option is added.
+- jsonpath `wrap` options functionality is modified.  See README.
+- jsonpath `emptyValue` option is added.
+- jsonpath functions can be specified during evaluation call
+- predicate.not is added.
 
 # v1.4.2 - March 29, 2015
 
