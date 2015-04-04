@@ -566,4 +566,11 @@ describe('jsonpath store example wrap=false', function () {
         var jpbind = jp.bind(null, store);
         expect(jpbind).to.throw(Error);
     });
+
+    it('$store.book[1]^^^^', function () {
+        var jp = jsonpath.instance('$store.book[1]^^^^', opts);
+        var actual = jp(store);
+        var expected = null;
+        expect(actual).to.deep.equal(store);
+    });
 });
