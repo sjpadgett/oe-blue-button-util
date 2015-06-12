@@ -1,4 +1,4 @@
-# 1.5.0 - TBD
+# 1.5.0 - June 12, 2015
 
 - jsonpath `wrap` options functionality is modified.  See README.
 - jsonpath `emptyValue` option is added.
