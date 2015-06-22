@@ -573,4 +573,11 @@ describe('jsonpath store example wrap=false', function () {
         var expected = null;
         expect(actual).to.deep.equal(store);
     });
+
+    it('$', function () {
+        var jp = jsonpath.instance('$', opts);
+        var actual = jp(store);
+        var expected = store;
+        expect(actual).to.deep.equal(expected);
+    });
 });
