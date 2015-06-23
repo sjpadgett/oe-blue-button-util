@@ -34,7 +34,11 @@ describe('jsonpath normalization', function () {
 
     it('$..book[(@.length-1)]', function () {
         var actual = jsonpath.normalize('$..book[(@.length-1)]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', '(@.length-1)']);
+        var scriptNode = {
+            type: 'script',
+            parameter: '@.length-1'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', scriptNode]);
     });
 
     it('$..book[-1:]', function () {
@@ -59,12 +63,20 @@ describe('jsonpath normalization', function () {
 
     it('$..book[?(@.isbn)]', function () {
         var actual = jsonpath.normalize('$..book[?(@.isbn)]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', '?(@.isbn)']);
+        var filterScriptNode = {
+            type: 'filter_script',
+            parameter: '@.isbn'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', filterScriptNode]);
     });
 
     it('$..[?(@.price>19)]^', function () {
         var actual = jsonpath.normalize('$..[?(@.price>19)]^');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, '?(@.price>19)', jsonpath.types.PARENT]);
+        var filterScriptNode = {
+            type: 'filter_script',
+            parameter: '@.price>19'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, filterScriptNode, jsonpath.types.PARENT]);
     });
 
     it('$..*', function () {
@@ -74,7 +86,11 @@ describe('jsonpath normalization', function () {
 
     it('$.store.book[?(@path !== "$[\'store\'][\'book\'][0]")]', function () {
         var actual = jsonpath.normalize('$.store.book[?(@path !== "$[\'store\'][\'book\'][0]")]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'store', 'book', '?(@path !== "$[\'store\'][\'book\'][0]")']);
+        var filterScriptNode = {
+            type: 'filter_script',
+            parameter: '@path !== "$[\'store\'][\'book\'][0]"'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'store', 'book', filterScriptNode]);
     });
 
     it('$.store..price.round()', function () {
