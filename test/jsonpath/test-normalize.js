@@ -2,10 +2,9 @@
 
 var chai = require('chai');
 
-var bbu = require('../../index');
+var jsonpath = require('../../lib/jsonpath/parser');
 
 var expect = chai.expect;
-var jsonpath = bbu.jsonpath;
 
 describe('jsonpath normalization', function () {
     it('$.store.book[*].author', function () {
