@@ -123,7 +123,11 @@ describe('jsonpath normalization', function () {
 
     it('$.store..price.round()', function () {
         var actual = jsonpath.normalize('$.store..price.round()');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'store', jsonpath.types.RECURSIVE_DESCENT, 'price', 'round()']);
+        var fnObject = {
+            type: 'fn',
+            parameter: 'round'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'store', jsonpath.types.RECURSIVE_DESCENT, 'price', fnObject]);
     });
 
     it('$.link[$.obj.library.books[0].references[*]].title', function () {
