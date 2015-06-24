@@ -29,7 +29,11 @@ describe('jsonpath normalization', function () {
 
     it('$..book[2]', function () {
         var actual = jsonpath.normalize('$..book[2]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', '2']);
+        var propertiesObject = {
+            type: 'properties',
+            parameter: [2]
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', propertiesObject]);
     });
 
     it('$..book[(@.length-1)]', function () {
@@ -56,7 +60,11 @@ describe('jsonpath normalization', function () {
 
     it('$..book[1,2]', function () {
         var actual = jsonpath.normalize('$..book[1,2]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', '1,2']);
+        var propertiesObject = {
+            type: 'properties',
+            parameter: [1, 2]
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', propertiesObject]);
     });
 
     it('$..book[:2]', function () {
@@ -74,7 +82,11 @@ describe('jsonpath normalization', function () {
 
     it('$..book[*][category,author]', function () {
         var actual = jsonpath.normalize('$..book[*][category,author]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', jsonpath.types.WILDCARD, 'category,author']);
+        var propertiesObject = {
+            type: 'properties',
+            parameter: ['category', 'author']
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', jsonpath.types.WILDCARD, propertiesObject]);
     });
 
     it('$..book[?(@.isbn)]', function () {
