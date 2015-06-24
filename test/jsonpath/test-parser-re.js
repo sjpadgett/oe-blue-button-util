@@ -46,7 +46,7 @@ describe('reqular expression', function () {
         });
     });
 
-    describe('range - index only', function () {
+    describe('integer', function () {
         var expressions = [
             '-1',
             '0',
@@ -56,109 +56,66 @@ describe('reqular expression', function () {
 
         expressions.forEach(function (expression) {
             it(expression, function () {
-                var result = re.range.exec(expression);
-                expectSingleMatch(expression, result, 4);
-                expect(result[1]).to.equal(expression);
-                expect(result[2]).to.equal(undefined);
-                expect(result[3]).to.equal(undefined);
+                var result = re.integer.exec(expression);
+                expectSingleMatch(expression, result);
             });
 
             var withComma = expression + ',';
             it(withComma, function () {
-                var result = re.range.exec(withComma);
-                expectSingleMatch(expression, result, 4);
-                expect(result[1]).to.equal(expression);
-                expect(result[2]).to.equal(undefined);
-                expect(result[3]).to.equal(undefined);
+                var result = re.integer.exec(withComma);
+                expectSingleMatch(expression, result);
             });
 
             var withCommaRepeat = expression + ',' + expression;
             it(withCommaRepeat, function () {
-                var result = re.range.exec(withCommaRepeat);
-                expectSingleMatch(expression, result, 4);
-                expect(result[1]).to.equal(expression);
-                expect(result[2]).to.equal(undefined);
-                expect(result[3]).to.equal(undefined);
+                var result = re.integer.exec(withCommaRepeat);
+                expectSingleMatch(expression, result);
             });
         });
     });
 
-    describe('range - start:end', function () {
+    describe('range', function () {
         var expressions = [
             '1:10',
             '0:-4',
             '2:5',
-            '9:11'
-        ];
-
-        expressions.forEach(function (expression) {
-            it(expression, function () {
-                var result = re.range.exec(expression);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(undefined);
-            });
-
-            var withComma = expression + ',';
-            it(withComma, function () {
-                var result = re.range.exec(withComma);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(undefined);
-            });
-
-            var withCommaRepeat = expression + ',' + expression;
-            it(withCommaRepeat, function () {
-                var result = re.range.exec(withCommaRepeat);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(undefined);
-            });
-        });
-    });
-
-    describe('range - start:step:end', function () {
-        var expressions = [
+            '9:11',
             '1:1:10',
             '0:2:-4',
             '2:2:5',
             '11:-2:0'
         ];
 
+        var expectRangeComponents = function (expression, result) {
+            expectSingleMatch(expression, result, 4);
+            var actuals = expression.split(':').map(function (piece) {
+                if (piece === '') {
+                    return undefined;
+                } else {
+                    return piece;
+                }
+            });
+            expect(result[1]).to.equal(actuals[0]);
+            expect(result[2]).to.equal(actuals[1]);
+            expect(result[3]).to.equal(actuals[2]);
+        };
+
         expressions.forEach(function (expression) {
             it(expression, function () {
                 var result = re.range.exec(expression);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(actuals[2]);
+                expectRangeComponents(expression, result);
             });
 
             var withComma = expression + ',';
             it(withComma, function () {
                 var result = re.range.exec(withComma);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(actuals[2]);
+                expectRangeComponents(expression, result);
             });
 
             var withCommaRepeat = expression + ',' + expression;
             it(withCommaRepeat, function () {
                 var result = re.range.exec(withCommaRepeat);
-                expectSingleMatch(expression, result, 4);
-                var actuals = expression.split(':');
-                expect(result[1]).to.equal(actuals[0]);
-                expect(result[2]).to.equal(actuals[1]);
-                expect(result[3]).to.equal(actuals[2]);
+                expectRangeComponents(expression, result);
             });
         });
     });
