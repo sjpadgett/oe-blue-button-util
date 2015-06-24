@@ -43,7 +43,15 @@ describe('jsonpath normalization', function () {
 
     it('$..book[-1:]', function () {
         var actual = jsonpath.normalize('$..book[-1:]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', '-1:']);
+        var propertiesObject = {
+            type: 'properties',
+            parameter: [{
+                start: -1,
+                end: null,
+                step: 1
+            }]
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', propertiesObject]);
     });
 
     it('$..book[1,2]', function () {
@@ -53,7 +61,15 @@ describe('jsonpath normalization', function () {
 
     it('$..book[:2]', function () {
         var actual = jsonpath.normalize('$..book[:2]');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', ':2']);
+        var propertiesObject = {
+            type: 'properties',
+            parameter: [{
+                start: 0,
+                end: 2,
+                step: 1
+            }]
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, jsonpath.types.RECURSIVE_DESCENT, 'book', propertiesObject]);
     });
 
     it('$..book[*][category,author]', function () {

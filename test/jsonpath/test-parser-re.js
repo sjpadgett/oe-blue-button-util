@@ -6,6 +6,7 @@ var parser = require('../../lib/jsonpath/parser.js');
 
 var expect = chai.expect;
 var re = parser.re;
+var expandSubscriptProperties = parser.expandSubscriptProperties;
 
 describe('reqular expression verification', function () {
     var expectSingleMatch = function (expression, result, count) {
@@ -174,6 +175,26 @@ describe('reqular expression verification', function () {
                 var result = re.qq_string.exec(withCommaRepeat);
                 expectSingleMatch(expression, result);
             });
+        });
+    });
+});
+
+describe('expandSubscriptProperties', function () {
+    var subscripts = [{
+        value: '1:8:2',
+        expected: [{
+            start: 1,
+            end: 8,
+            step: 2
+        }]
+    }];
+
+    subscripts.forEach(function (subscript) {
+        it(subscript.value, function () {
+            var actual = [];
+            var r = expandSubscriptProperties(subscript.value, actual);
+            expect(r).to.equal(true);
+            expect(actual).to.deep.equal(subscript.expected);
         });
     });
 });
