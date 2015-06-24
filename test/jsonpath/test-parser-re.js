@@ -7,7 +7,7 @@ var parser = require('../../lib/jsonpath/parser.js');
 var expect = chai.expect;
 var re = parser.re;
 
-describe('reqular expression', function () {
+describe('reqular expression verification', function () {
     var expectSingleMatch = function (expression, result, count) {
         count = count || 1;
         expect(result).not.to.equal(null);
@@ -83,7 +83,12 @@ describe('reqular expression', function () {
             '1:1:10',
             '0:2:-4',
             '2:2:5',
-            '11:-2:0'
+            '11:-2:0',
+            '0::2',
+            ':2',
+            ':5:1',
+            '::2',
+            '::'
         ];
 
         var expectRangeComponents = function (expression, result) {
