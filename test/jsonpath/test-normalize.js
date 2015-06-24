@@ -116,7 +116,11 @@ describe('jsonpath normalization', function () {
 
     it('$.link[$.obj.library.books[0].references[*]].title', function () {
         var actual = jsonpath.normalize('$.link[$.obj.library.books[0].references[*]].title');
-        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'link', '$.obj.library.books[0].references[*]', 'title']);
+        var subpathObject = {
+            type: 'subpath',
+            parameter: '$.obj.library.books[0].references[*]'
+        };
+        expect(actual).to.deep.equal([jsonpath.types.ROOT, 'link', subpathObject, 'title']);
     });
 
     it('$', function () {
