@@ -1,6 +1,8 @@
 # 1.6.0 - TBD
 
 - jsonpath library is moved to new package jsonave.
+- predicate library is retired.  Use combination of lodash methods negate, 
+  partialRight and has.
 
 # 1.5.0 - June 12, 2015
 
