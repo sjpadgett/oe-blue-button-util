@@ -1,3 +1,7 @@
+# 1.6.0 - TBD
+
+- jsonpath library is moved to new package jsonave.
+
 # 1.5.0 - June 12, 2015
 
 - jsonpath `wrap` options functionality is modified.  See README.

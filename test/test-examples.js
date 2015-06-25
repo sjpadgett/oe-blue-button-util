@@ -558,36 +558,4 @@
          expect(r3).to.equal(true);
          expect(r4).to.equal(true);
      });
-
-     it('jsonpath.instance - 0', function () {
-         var example = require('./jsonpath/examples/store.json');
-
-         var options = {
-             functions: {
-                 round: function (obj) {
-                     return Math.round(obj);
-                 }
-             }
-         };
-         var jp = jsonpath.instance('$.store..price.round()', options);
-         var result = jp(example);
-         //console.log(result); // [ 9, 13, 9, 23, 20 ]
-         expect(result).to.deep.equal([9, 13, 9, 23, 20]);
-     });
-
-     it('jsonpath.instance - 1', function () {
-         var example = require('./jsonpath/examples/store.json');
-
-         var round = function (obj) {
-             return Math.round(obj);
-         };
-
-         var jp = jsonpath.instance('$.store..price.round()');
-         var result = jp(example, {
-             round: round
-         });
-         //console.log(result); // [ 9, 13, 9, 23, 20 ]
-         expect(result).to.deep.equal([9, 13, 9, 23, 20]);
-     });
-
  });
