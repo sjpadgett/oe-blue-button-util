@@ -25,59 +25,6 @@
          expect(r2).to.equal(true);
      });
 
-     it('object.deepValue - 0', function () {
-         var input = {
-             a: {
-                 b: {
-                     c: 1
-                 },
-                 d: 2
-             },
-             e: 3
-         };
-
-         var r0 = ob.deepValue(null, 'any');
-         var r1 = ob.deepValue(input, 'a.b');
-         var r2 = ob.deepValue(input, 'a.b.c');
-         var r3 = ob.deepValue(input, 'a.e.f');
-         var r4 = ob.deepValue(input, 'a.f');
-         var r5 = ob.deepValue('primary data types', 'any');
-
-         //console.log(r0); // null
-         //console.log(r1); // {c: 1}
-         //console.log(r2); // 1
-         //console.log(r3); // null
-         //console.log(r4); // null
-         //console.log(r5); // null
-         expect(r0).to.equal(null);
-         expect(r1).to.deep.equal({
-             c: 1
-         });
-         expect(r2).to.equal(1);
-         expect(r3).to.equal(null);
-         expect(r4).to.equal(null);
-         expect(r5).to.equal(null);
-     });
-
-     it('object.deepValue - 0', function () {
-         var input = [{
-             a: 1
-         }, {
-             b: ['value']
-         }];
-
-         var r0 = ob.deepValue(input, '0.a');
-         var r1 = ob.deepValue(input, '1.b');
-         var r2 = ob.deepValue(input, '1.b.0');
-
-         //console.log(r0); // 1
-         //console.log(r1); // ['value']
-         //console.log(r2); // 'value'
-         expect(r0).to.equal(1);
-         expect(r1).to.deep.equal(['value']);
-         expect(r2).to.equal('value');
-     });
-
      it('objectset.compact - 1', function () {
          var obj = {
              a: 1,
@@ -99,42 +46,6 @@
                  e: 4
              },
              f: {}
-         });
-     });
-
-     it('objectset.deepValue - 0', function () {
-         var obj = {};
-
-         obs.deepValue(obj, 'a.b', 'value');
-         //console.log(obj); // {a: {b: 'value'}}
-         expect(obj).to.deep.equal({
-             a: {
-                 b: 'value'
-             }
-         });
-     });
-
-     it('objectset.deepValue - 1', function () {
-         var obj = {
-             a: 1,
-             b: {
-                 c: 2,
-                 d: 3
-             }
-         };
-
-         obs.deepValue(obj, 'b.c', {
-             e: 4
-         });
-         //console.log(obj); // {a: 1, b: {c: {e: 4}, d: 3}}
-         expect(obj).to.deep.equal({
-             a: 1,
-             b: {
-                 c: {
-                     e: 4
-                 },
-                 d: 3
-             }
          });
      });
 
