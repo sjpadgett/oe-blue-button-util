@@ -1,3 +1,11 @@
+# 1.6.0 - TBD
+
+- jsonpath library is moved to new package jsonave.
+- predicate library is retired.  Use combination of lodash methods negate, 
+  partialRight and has.
+- objectset.merge, objectset.deepValue, object.deepValue, object.isObject
+  methods are retired.  Each has lodash equivalent.
+
 # 1.5.0 - June 12, 2015
 
 - jsonpath `wrap` options functionality is modified.  See README.
