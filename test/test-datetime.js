@@ -11,7 +11,7 @@ describe('datetime: dateToModel->modelToDate->dateToModel', function () {
     ['2012', '2012-05', '2012-05-23'].forEach(function (input) {
         it(input, function () {
             var model = datetime.dateToModel(input);
-            expect(model).to.exist();
+            expect(model).to.exist;
             var reInput = datetime.modelToDate(model);
             expect(reInput).to.equal(input);
         });
@@ -22,7 +22,7 @@ describe('datetime: dateTimeToModel->modelToDateTime->dateTimeToModel', function
     ['2012-05-23', '2015-03-07T16:44:28.730Z'].forEach(function (input) {
         it(input, function () {
             var model = datetime.dateTimeToModel(input);
-            expect(model).to.exist();
+            expect(model).to.exist;
             var reInput = datetime.modelToDateTime(model);
             expect(reInput).to.equal(input);
         });

@@ -46,6 +46,6 @@ describe('objectset.compact', function () {
         expect(r).to.have.property('a');
         expect(r).to.not.have.property('b');
         expect(r).to.have.property('inh');
-        expect(r.inh).to.not.exist();
+        expect(r.inh).to.not.exist;
     });
 });
